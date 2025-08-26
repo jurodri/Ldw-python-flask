@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Games</title>
+</head>
+<body>
+    <h1>Cadastro de Jogos</h1>
+    <hr>
+    <form action="{{url_for('newgame')}}" method="POST">
+        <label>Titulo:</label>
+        <input type="text" name="Title" >
+        <label>Ano:</label>
+        <input type="text" name="Year" >
+        <label>Categoria:</label>
+        <input type="text" name="Category" >
+        <input type="submit" value="Cadastrar">
+</form>
+<br>
+<hr>
+<table>
+    <tr>
+        <th>Titulo</th>
+        <th>Ano</th>
+        <th>Categoria</th>
+    </tr>
+    {% for game in gamelist %}
+     <tr>
+        <th>{{game.Titulo}}</th>
+        <th>{{game.Ano}}</th>
+        <th>{{game.Categoria}}</th>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
