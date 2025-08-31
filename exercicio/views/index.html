@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 text-center">
+        <div class="text-center mb-4">
+            <img src="{{ url_for('static', filename='images/smartphone.png') }}" alt="Smartphone" class="img-fluid main-image">
+        </div>
+        <h2 class="mb-4">Bem-vindo ao Mundo Celular</h2>
+        <p class="lead">Sua plataforma para explorar modelos e acessórios!</p>
+        
+        <div class="mt-5">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <img src="{{ url_for('static', filename='images/modelos.jpg') }}" alt="Modelos de celular" class="card-img-top mb-3">
+                            <h5 class="card-title">Modelos</h5>
+                            <p class="card-text">Confira os modelos de celular disponíveis</p>
+                            <a href="{{ url_for('modelos_celular') }}" class="btn btn-primary">Acessar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <img src="{{ url_for('static', filename='images/acessorios.jpg') }}" alt="Acessórios para celular" class="card-img-top mb-3">
+                            <h5 class="card-title">Acessórios</h5>
+                            <p class="card-text">Veja nossos acessórios para celular</p>
+                            <a href="{{ url_for('acessorios_celular') }}" class="btn btn-primary">Acessar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

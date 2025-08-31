@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="text-center mb-4">
+            <img src="{{ url_for('static', filename='images/modelos.jpg') }}" alt="Modelos de celular" class="img-fluid section-image">
+        </div>
+        <h2 class="mb-4">Modelos de Celular</h2>
+        
+        <div class="card custom-card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Modelo em Destaque</h4>
+                <ul>
+                    <li>Modelo: <strong>{{modelo_destaque}}</strong></li>
+                    <li>Ano de Lançamento: <strong>{{lancamento}}</strong></li>
+                    <li>Fabricante: <strong>{{fabricante}}</strong></li>
+                </ul>
+                <p>O modelo {{modelo_destaque}} tem {{2025-lancamento}} ano(s) no mercado</p>
+            </div>
+        </div>
+
+        <div class="card custom-card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Adicionar Modelo</h4>
+                <form action="{{ url_for('modelos_celular') }}" method="POST">
+                    <div class="mb-3">
+                        <label for="modelo" class="form-label">Nome do Modelo:</label>
+                        <input type="text" class="form-control" id="modelo" name="modelo" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card custom-card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Lista de Modelos</h4>
+                <ol class="list-group list-group-numbered">
+                    {% for modelo in modelos %}
+                    <li class="list-group-item">{{ modelo }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+
+        <div class="card custom-card">
+            <div class="card-body">
+                <h4 class="card-title">Informações do Fabricante</h4>
+                {% for key, value in fabricante_info.items() %}
+                <div class="mb-2">
+                    <strong>{{key}}:</strong> {{value}}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
