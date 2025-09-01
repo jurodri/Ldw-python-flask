@@ -4,7 +4,7 @@ from flask import Flask, render_template
 from controllers import routes
 
 # Criando uma instância do Flask
-app = Flask(__name__, template_folder="views", static_folder="static") # __name__ representa o nome do arquivo que está sendo executado
+app = Flask(__name__, template_folder="views", static_folder="static") 
 routes.init_app(app)
 # Se for executado diretamente pelo interpretador
 if __name__ == "__main__":
