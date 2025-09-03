@@ -8,6 +8,6 @@ app = Flask(__name__, template_folder="views", static_folder="static")
 routes.init_app(app)
 # Se for executado diretamente pelo interpretador
 if __name__ == "__main__":
-    # Iniciando o servidor
+    # Iniciando o servidor com 0000
     app.run(host="0,0,0,0", port=5000, debug=True) 
     

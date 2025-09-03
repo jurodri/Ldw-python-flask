@@ -8,6 +8,6 @@ app = Flask(__name__, template_folder="views") # __name__ representa o nome do a
 routes.init_app(app)
 # Se for executado diretamente pelo interpretador
 if __name__ == "__main__":
-    # Iniciando o servidor
+    # Iniciando o servidor 5000
     app.run(host="localhost", port=5000, debug=True) 
     
