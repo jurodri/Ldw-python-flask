@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="text-center">Nossos Clientes Satisfeitos</h1>
+        <p class="text-center lead">Conheça algumas pessoas que já adquiriram nossos produtos e estão amando a experiência!</p>
+    </div>
+</div>
+
+<div class="row">
+    {% for cliente in clientes %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 cliente-card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0">{{ cliente.name }}</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-center mb-3">
+                    <img src="https://i.pravatar.cc/150?u={{ cliente.email }}" alt="{{ cliente.name }}" class="rounded-circle cliente-img">
+                </div>
+                <p><strong>Email:</strong> {{ cliente.email }}</p>
+                <p><strong>Telefone:</strong> {{ cliente.phone }}</p>
+                <p><strong>Website:</strong> {{ cliente.website }}</p>
+                <p><strong>Empresa:</strong> {{ cliente.company.name }}</p>
+                
+                <div class="accordion" id="accordion{{ cliente.id }}">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ cliente.id }}">
+                                Ver Endereço
+                            </button>
+                        </h2>
+                        <div id="collapse{{ cliente.id }}" class="accordion-collapse collapse" data-bs-parent="#accordion{{ cliente.id }}">
+                            <div class="accordion-body">
+                                <p><strong>Endereço:</strong><br>
+                                {{ cliente.address.street }}, {{ cliente.address.suite }}<br>
+                                {{ cliente.address.city }}, {{ cliente.address.zipcode }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-light">
+                <small class="text-muted">Cliente desde: 2023</small>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

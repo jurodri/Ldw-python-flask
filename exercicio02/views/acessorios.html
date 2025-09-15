@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="text-center mb-4">
+            <img src="{{ url_for('static', filename='images/acessorios.jpg') }}" alt="Acessórios para celular" class="img-fluid section-image">
+        </div>
+        <h2 class="mb-4">Acessórios para Celular</h2>
+        
+        <div class="card custom-card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Adicionar Acessório</h4>
+                <form action="{{ url_for('acessorios_celular') }}" method="POST">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="nome" class="form-label">Nome:</label>
+                            <input type="text" class="form-control" id="nome" name="nome" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="tipo" class="form-label">Tipo:</label>
+                            <input type="text" class="form-control" id="tipo" name="tipo" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="preco" class="form-label">Preço:</label>
+                            <input type="text" class="form-control" id="preco" name="preco" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card custom-card">
+            <div class="card-body">
+                <h4 class="card-title">Catálogo de Acessórios</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Tipo</th>
+                                <th>Preço</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for acessorio in acessorios %}
+                            <tr>
+                                <td>{{ acessorio.Nome }}</td>
+                                <td>{{ acessorio.Tipo }}</td>
+                                <td>{{ acessorio.Preço }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
