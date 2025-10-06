@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="text-center mb-4">
+            <img src="{{ url_for('static', filename='images/modelos.jpg') }}" alt="Modelos de celular"
+                class="img-fluid section-image">
+        </div>
+        <h2 class="mb-4">Modelos de Celular</h2>
+
+        <!-- Formulário para adicionar modelo -->
+        <div class="card custom-card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Adicionar Modelo</h4>
+                <form action="{{ url_for('modelos_celular') }}" method="POST">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="nome" class="form-label">Nome do Modelo:</label>
+                            <input type="text" class="form-control" id="nome" name="nome" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="lancamento" class="form-label">Ano de Lançamento:</label>
+                            <input type="number" class="form-control" id="lancamento" name="lancamento">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="fabricante" class="form-label">Fabricante:</label>
+                            <input type="text" class="form-control" id="fabricante" name="fabricante">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tabela de modelos -->
+        <div class="card custom-card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Lista de Modelos</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Lançamento</th>
+                                <th>Fabricante</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for modelo in modelos %}
+                            <tr>
+                                <td>{{ modelo.nome }}</td>
+                                <td>{{ modelo.lancamento or 'N/A' }}</td>
+                                <td>{{ modelo.fabricante or 'N/A' }}</td>
+                                <td>
+                                    <a href="{{ url_for('edit_modelo', id=modelo.id) }}"
+                                        class="btn btn-warning btn-sm">Editar</a>
+                                    <form action="{{ url_for('delete_modelo', id=modelo.id) }}" method="POST"
+                                        style="display: inline;">
+                                        <button type="submit" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Tem certeza?')">Excluir</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Paginação -->
+                <nav aria-label="Navegação de página">
+                    <ul class="pagination justify-content-center">
+
+                        {% for page_num in modelos.iter_pages() %}
+                        {% if page_num %}
+                        {% if page_num == modelos.page %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ page_num }}</span>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('modelos_celular', page=page_num) }}">{{ page_num
+                                }}</a>
+                        </li>
+                        {% endif %}
+                        {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

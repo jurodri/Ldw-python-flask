@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4">Editar Acessório</h2>
+        
+        <div class="card custom-card">
+            <div class="card-body">
+                <form action="{{ url_for('edit_acessorio', id=acessorio.id) }}" method="POST">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="nome" class="form-label">Nome:</label>
+                            <input type="text" class="form-control" id="nome" name="nome" value="{{ acessorio.nome }}" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="tipo" class="form-label">Tipo:</label>
+                            <input type="text" class="form-control" id="tipo" name="tipo" value="{{ acessorio.tipo }}" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="preco" class="form-label">Preço:</label>
+                            <input type="text" class="form-control" id="preco" name="preco" value="{{ acessorio.preco }}" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Salvar Alterações</button>
+                    <a href="{{ url_for('acessorios_celular') }}" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

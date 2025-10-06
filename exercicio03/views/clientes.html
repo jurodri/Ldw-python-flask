@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row mb-5">
+    <div class="col-12 text-center">
+        <h1 class="fw-bold">Nossos Clientes Satisfeitos</h1>
+        <p class="lead text-muted">Conheça algumas pessoas que já adquiriram nossos produtos e estão amando a experiência!</p>
+    </div>
+</div>
+
+<div class="row">
+    {% for cliente in clientes %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 cliente-card text-center">
+            <div class="d-flex justify-content-center mt-4">
+                <img src="https://i.pravatar.cc/150?u={{ cliente.email }}" 
+                     alt="{{ cliente.name }}" 
+                     class="rounded-circle cliente-img shadow-sm">
+            </div>
+            <div class="card-body">
+                <h5 class="fw-bold mt-3">{{ cliente.name }}</h5>
+                <span class="badge bg-primary mb-2">{{ cliente.company.name }}</span>
+                <p class="mb-1"><i class="bi bi-envelope-fill text-primary"></i> {{ cliente.email }}</p>
+                <p class="mb-1"><i class="bi bi-telephone-fill text-primary"></i> {{ cliente.phone }}</p>
+                <p class="mb-3"><i class="bi bi-globe2 text-primary"></i> <a href="http://{{ cliente.website }}" target="_blank">{{ cliente.website }}</a></p>
+
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}

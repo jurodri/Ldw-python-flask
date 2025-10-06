@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="text-center mb-4">
+            <img src="{{ url_for('static', filename='images/acessorios.jpg') }}" alt="Acessórios para celular" class="img-fluid section-image">
+        </div>
+        <h2 class="mb-4">Acessórios para Celular</h2>
+
+        <!-- Formulário para adicionar acessório -->
+        <div class="card custom-card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Adicionar Acessório</h4>
+                <form action="{{ url_for('acessorios_celular') }}" method="POST">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="nome" class="form-label">Nome:</label>
+                            <input type="text" class="form-control" id="nome" name="nome" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="tipo" class="form-label">Tipo:</label>
+                            <input type="text" class="form-control" id="tipo" name="tipo" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="preco" class="form-label">Preço:</label>
+                            <input type="text" class="form-control" id="preco" name="preco" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tabela de acessórios -->
+        <div class="card custom-card">
+            <div class="card-body">
+                <h4 class="card-title">Lista de Acessórios</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Tipo</th>
+                                <th>Preço</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for acessorio in acessorios %}
+                            <tr>
+                                <td>{{ acessorio.nome }}</td>
+                                <td>{{ acessorio.tipo }}</td>
+                                <td>R$ {{ "%.2f"|format(acessorio.preco) }}</td>
+                                <td>
+                                    <a href="{{ url_for('edit_acessorio', id=acessorio.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                                    <form action="{{ url_for('delete_acessorio', id=acessorio.id) }}" method="POST" style="display: inline;">
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza?')">Excluir</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Paginação (se estiver usando) -->
+                {% if acessorios.has_prev or acessorios.has_next %}
+                <nav aria-label="Navegação de página" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        {% if acessorios.has_prev %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('acessorios_celular', page=acessorios.prev_num) }}">Anterior</a>
+                        </li>
+                        {% endif %}
+                        
+                        {% for page_num in acessorios.iter_pages() %}
+                            {% if page_num %}
+                                <li class="page-item {% if page_num == acessorios.page %}active{% endif %}">
+                                    <a class="page-link" href="{{ url_for('acessorios_celular', page=page_num) }}">{{ page_num }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if acessorios.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('acessorios_celular', page=acessorios.next_num) }}">Próxima</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

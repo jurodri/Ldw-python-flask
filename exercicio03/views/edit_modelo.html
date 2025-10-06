@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="text-center mb-4">
+            <img src="{{ url_for('static', filename='images/modelos.jpg') }}" alt="Modelos de celular" class="img-fluid section-image">
+        </div>
+        <h2 class="mb-4">Editar Modelo</h2>
+        
+        <div class="card custom-card">
+            <div class="card-body">
+                <form action="{{ url_for('edit_modelo', id=modelo.id) }}" method="POST">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="nome" class="form-label">Nome do Modelo:</label>
+                            <input type="text" class="form-control" id="nome" name="nome" value="{{ modelo.nome }}" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="lancamento" class="form-label">Ano de Lançamento:</label>
+                            <input type="number" class="form-control" id="lancamento" name="lancamento" value="{{ modelo.lancamento or '' }}">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="fabricante" class="form-label">Fabricante:</label>
+                            <input type="text" class="form-control" id="fabricante" name="fabricante" value="{{ modelo.fabricante or '' }}">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Salvar Alterações</button>
+                    <a href="{{ url_for('modelos_celular') }}" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
