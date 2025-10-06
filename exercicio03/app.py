@@ -6,7 +6,6 @@ import os
 app = Flask(__name__, template_folder='views')
 routes.init_app(app)
 
-# Configuração do SQLite
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DB_NAME = 'projects.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(BASE_DIR, DB_NAME)}'

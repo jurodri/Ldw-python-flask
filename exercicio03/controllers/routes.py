@@ -9,12 +9,12 @@ def init_app(app):
     def home():
         return render_template("index.html")
 
-    # === ROTAS PARA MODELOS ===
+    
     @app.route('/modelos', methods=['GET', 'POST'])
     def modelos_celular():
-        # PAGINAÇÃO - Obter página atual (padrão: 1)
+        
         page = request.args.get('page', 1, type=int)
-        per_page = 5  # Itens por página
+        per_page = 5  
         
         if request.method == 'POST':
             nome = request.form['nome']
@@ -55,10 +55,10 @@ def init_app(app):
         
         return render_template('edit_modelo.html', modelo=modelo)
 
-    # === ROTAS PARA ACESSÓRIOS ===
+    
     @app.route('/acessorios', methods=['GET', 'POST'])
     def acessorios_celular():
-        # PAGINAÇÃO
+        
         page = request.args.get('page', 1, type=int)
         per_page = 5
         
@@ -78,12 +78,10 @@ def init_app(app):
             db.session.commit()
             return redirect(url_for('acessorios_celular'))
         
-        # CONSULTA PAGINADA
         acessorios_paginados = Acessorio.query.paginate(
             page=page, per_page=per_page, error_out=False
         )
         
-        # Buscar modelos para o dropdown
         modelos = Modelo.query.all()
         return render_template('acessorios.html', 
                              acessorios=acessorios_paginados, 
@@ -92,7 +90,7 @@ def init_app(app):
     @app.route('/acessorios/edit/<int:id>', methods=['GET', 'POST'])
     def edit_acessorio(id):
         acessorio = Acessorio.query.get_or_404(id)
-        modelos = Modelo.query.all()  # ⬅️ ADICIONE ESTA LINHA
+        modelos = Modelo.query.all()  
         
         if request.method == 'POST':
             acessorio.nome = request.form['nome']
@@ -102,7 +100,7 @@ def init_app(app):
             db.session.commit()
             return redirect(url_for('acessorios_celular'))
         
-        # ⬅️ ATUALIZE ESTA LINHA:
+       
         return render_template('edit_acessorio.html', acessorio=acessorio, modelos=modelos)
     
     @app.route('/acessorios/delete/<int:id>', methods=['POST'])
